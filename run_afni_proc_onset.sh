@@ -38,8 +38,7 @@ set fs_dir = ${rootdir}/derivatives/FreeSurfer/sub-${subject}_ses-${session}/SUM
 set subj      = ${subject}_ses${session}
 set group_id  = b
 
-    echo $subj
-   
+echo $subj
 #echo ${rootdir}
 #mkdir -p ${rootdir}/derivatives/TimingTask_Response
 #cd ${rootdir}/derivatives/TimingTask_Response
@@ -53,10 +52,7 @@ afni_proc.py -subj_id $subj                                                  \
 -copy_anat ${fs_dir}/T1.nii                                 \
 -tcat_remove_first_trs 0                                              \
 -anat_has_skull yes                                                      \
-    -dsets $epi_dir/sub-${subject}_ses-${session}_task-timing_run-1_bold.nii.gz  \
-	   $epi_dir/sub-${subject}_ses-${session}_task-timing_run-2_bold.nii.gz \
-	   $epi_dir/sub-${subject}_ses-${session}_task-timing_run-3_bold.nii.gz \
-	   $epi_dir/sub-${subject}_ses-${session}_task-timing_run-4_bold.nii.gz \
+-dsets $epi_dir/sub-${subject}_ses-${session}_task-timing_run-*_bold.nii.gz  \
 -tlrc_base MNI_avg152T1+tlrc                                          \
 -volreg_align_to first                                                \
 -volreg_align_e2a                                                     \
@@ -84,3 +80,7 @@ f 0 12 3                                                       \
 tcsh proc.${subj}
 
 #-dsets $epi_dir/sub-${subject}_ses-${session}_task-timing_run-*_bold.nii.gz  \
+
+#-dsets $epi_dir/sub-${subject}_ses-${session}_task-timing_run-1_bold.nii.gz  \
+#   $epi_dir/sub-${subject}_ses-${session}_task-timing_run-2_bold.nii.gz \
+#    $epi_dir/sub-${subject}_ses-${session}_task-timing_run-3_bold.nii.gz \

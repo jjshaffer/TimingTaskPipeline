@@ -8,8 +8,8 @@
 #Local Path
 SHARE_DIR=/Volumes/mrrcdata
 
-PROJECT_DIR=${SHARE_DIR}/SCZ_TMS_TIMING
-BIDS_DIR=${SHARE_DIR}/SCZ_TMS_TIMING/SCZ_TMS_data
+PROJECT_DIR=${SHARE_DIR}/BD_TMS_TIMING
+BIDS_DIR=${SHARE_DIR}/BD_TMS_TIMING/BD_TMS_data
 
 subjId=$1
 
@@ -71,7 +71,7 @@ mv ${PROJECT_DIR}/BEHAV/*-${subjId}-1* ${PROJECT_DIR}/BEHAV/${subjectID}/ses-${p
 
 if [[ $numses > 1 ]]
    then
-       echo "Test"
+       #echo "Test"
        mkdir -p ${PROJECT_DIR}/BEHAV/${subjectID}/ses-${postSes}
        mv ${PROJECT_DIR}/BEHAV/*-${subjId}-2* ${PROJECT_DIR}/BEHAV/${subjectID}/ses-${postSes}
 

@@ -2,7 +2,7 @@
 
 #Set the name of the job. This will be the first part of the error/output filename.
 
-#$ -N SCZ_TIMING
+#$ -N BD_TIMING
 
 #Set the shell that should be used to run the job.
 #$ -S /bin/bash
@@ -30,22 +30,13 @@
 #$ -M joseph-shaffer@uiowa.edu
 
 #Run as Array Job
-#$ -t 35:40:1
+#$ -t 1:45:1
 
 #Do Stuff
 
 module load matlab/2018a
 
-#cd /Shared/MRRCdata/BD_TMS_TIMING/scripts/Func
-
-#bash runIterative_generateBIDSstructure.sh $(($SGE_TASK_ID+6))
-#bash runIterative_generateBIDSstructure.sh $(($SGE_TASK_ID+7))
-
-#matlab -nodesktop -nosplash -r "createScanTSV;quit;"
-
-
-
-cd /Shared/MRRCdata/SCZ_TMS_TIMING/scripts/FuncPipeline
+cd /Shared/MRRCdata/BD_TMS_TIMING/scripts/FuncPipeline
 bash readBIDS_forTimingTask.sh $(($SGE_TASK_ID-1))
 
 

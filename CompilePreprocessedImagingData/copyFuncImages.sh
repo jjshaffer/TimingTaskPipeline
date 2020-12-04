@@ -8,10 +8,6 @@ echo "DataDir:" $dir
 echo "Subject:" $subj
 echo "Session:" $ses
 
-#ANAT=$dir/$subj/AFNI_Preprocess/b$subj.results/anat_final.b$subj+tlrc
-#MASK=$dir/$subj/AFNI_Preprocess/b$subj.results/mask_anat.b$subj+tlrc
-
-
 FUNC=${dir}/${subj}_ses${ses}.results/stats.${subj}_ses${ses}+tlrc
 MASK=${dir}/${subj}_ses${ses}.results/mask_group+tlrc
 

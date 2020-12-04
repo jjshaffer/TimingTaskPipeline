@@ -8,10 +8,10 @@ SHARE_DIR=/Shared/MRRCdata
 #Local Path
 #SHARE_DIR=/Volumes/mrrcdata
 
-PROJECT_DIR=${SHARE_DIR}/SCZ_TMS_TIMING
+PROJECT_DIR=${SHARE_DIR}/BD_TMS_TIMING
 
-BIDS_DIR=${SHARE_DIR}/SCZ_TMS_TIMING/SCZ_TMS_data
-FREESURFER_DIR=${SHARE_DIR}/SCZ_TMS_TIMING/derivatives/FreeSurfer
+BIDS_DIR=${SHARE_DIR}/BD_TMS_TIMING/BD_TMS_data
+FREESURFER_DIR=${SHARE_DIR}/BD_TMS_TIMING/derivatives/FreeSurfer
 
 
 
@@ -41,7 +41,7 @@ echo $subject
 #Loop through each imaging session
 sessions=(${subjects[$i]}*/)
 numses=${#sessions[@]}
-echo $numses
+#echo $numses
 
 
 postSes=0;
@@ -59,7 +59,7 @@ session=${sessions[$x]}
 session=${session%*/}
 #Trim everything preceding -
 session=${session##*-}
-echo $session
+#echo $session
 ses[$j]=$session
 
 if [[ $session > $postSes ]]
@@ -68,7 +68,7 @@ then
 fi
 done
 
-echo ${postSes}_post
+#echo ${postSes}_post
 
 
 
@@ -125,23 +125,19 @@ session=${sessions[$j]}
 session=${session%*/}
 #Trim everything preceding -
 session=${session##*-}
-echo $session
+#echo $session
 
 
 #Set session index
 sessionIndex=0;
-if [[ $numses > 1 ]]
+if [[ $session = $postSes ]]
 then
-    if [[ $session = $postSes ]]
-    then
-	#echo $session
-	sessionIndex=1;
-    fi
+    #echo $session
+    sessionIndex=1;
 fi
-    #echo $sessionIndex
+#echo $sessionIndex
 ses[$sessionIndex]=$session
 
-#echo $ses[$sessionIndex]
 #Find anatomical files
 
 #echo ${sessions[$j]}
@@ -155,7 +151,7 @@ for k in `seq 0 $(($numfiles-1))`
 do
 
 filepath=${files[$k]}
-#echo $filepath
+
 file=$(basename $filepath)
 
 #echo $file
@@ -264,15 +260,13 @@ echo $task4
 
 
 ## Run AFNI Processing Steps on timing task runs
-tcsh run_afni_proc_onset.sh ${PROJECT_DIR} SCZ_TMS_data ${subject} ${ses[$j]} $task1 $task2 $task3 $task4
-tcsh run_afni_proc_response.sh ${PROJECT_DIR} SCZ_TMS_data ${subject} ${ses[$j]} $task1 $task2 $task3 $task4
+#tcsh run_afni_proc_onset.sh ${PROJECT_DIR} BD_TMS_data ${subject} ${ses[$j]} $task1 $task2 $task3 $task4
+tcsh run_afni_proc_response.sh ${PROJECT_DIR} BD_TMS_data ${subject} ${ses[$j]} $task1 $task2 $task3 $task4
 
-#tcsh run_afni_proc_onset_0131.sh ${PROJECT_DIR} SCZ_TMS_data ${subject} ${ses[$j]} $task1 $task2 $task3 $task4
-#tcsh run_afni_proc_response_0131.sh ${PROJECT_DIR} SCZ_TMS_data ${subject} ${ses[$j]} $task1 $task2 $task3 $task4
 
-#bash AlignFuncImages.sh $FREESURFER_DIR ${PROJECT_DIR}/derivatives/TimingTask_Onset ${subject} ${ses[$j]} mni_icbm152_t1_tal_nlin_asym_09c.nii
+#bash AlignFuncImages.sh $FREESURFER_DIR ${PROJECT_DIR}/derivatives/TimingTask_Preprocess ${subject} ${ses[$j]} mni_icbm152_t1_tal_nlin_asym_09c.nii
 
-#bash AlignFuncImages.sh $FREESURFER_DIR ${PROJECT_DIR}/derivatives/TimingTask_Response ${subject} ${ses[$j]} mni_icbm152_t1_tal_nlin_asym_09c.nii
+
 done
 
 #done #subject

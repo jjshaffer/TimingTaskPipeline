@@ -1,8 +1,6 @@
 function x = readTimingRun(filename, flag)
-%Function for parsing behavioral output for TMS timing task from ePrime
-%.txt file
-%   Author: Joe Shaffer
-%   Date: June, 2018
+%UNTITLED Summary of this function goes here
+%   Detailed explanation goes here
 
 %Read task output text file from ePrime into variable txt, then close the
 %file
