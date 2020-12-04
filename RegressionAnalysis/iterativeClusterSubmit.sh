@@ -2,7 +2,7 @@
 
 #Set the name of the job. This will be the first part of the error/output filename.
 
-#$ -N SCZ_TIMING
+#$ -N BD_TIMING
 
 #Set the shell that should be used to run the job.
 #$ -S /bin/bash
@@ -37,7 +37,7 @@
 module load matlab/2018a
 
 
-cd /Shared/MRRCdata/SCZ_TMS_TIMING/scripts/FuncPipeline/RegressionAnalysis
+cd /Shared/MRRCdata/BD_TMS_TIMING/scripts/FuncPipeline/RegressionAnalysis
 matlab -nodesktop -nosplash -r "TimingTaskAnalysis($SGE_TASK_ID);quit;"
 
 
