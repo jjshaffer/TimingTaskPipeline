@@ -15,7 +15,7 @@
 #$ -q PINC
 
 #Select the number of slots the job will use
-#$ -pe smp 2
+#$ -pe smp 4
 
 #Print informationn from the job into the output file
 #/bin/echo Here I am: `hostname`. Sleeping now at: `date`
@@ -30,7 +30,7 @@
 #$ -M joseph-shaffer@uiowa.edu
 
 #Run as Array Job
-#$ -t 1:61:1
+#$ -t 27:29:1
 
 #Do Stuff
 
