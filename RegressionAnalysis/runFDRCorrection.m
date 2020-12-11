@@ -1,5 +1,6 @@
 function x = runFDRCorrection(pfile, maskfile, outprefix, niitemplate)
 
+%h = load_nii('MNI_aligned_T1.nii.gz');
 h = load_nii(niitemplate);
 
 img = load(pfile);

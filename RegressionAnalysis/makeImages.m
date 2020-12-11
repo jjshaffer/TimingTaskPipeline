@@ -1,4 +1,4 @@
-function out = makeImages(imgFile, taskprefix, nameFile, niiTemplate)
+function out = makeImages(imgFile, inprefix, nameFile, niiTemplate)
 %Function for reading .mat file including statistics output from regression
 %analysis and saving individual nifti-formatted images for each
 %statistic/contrast and for creating 1-p value map. These images can then
@@ -29,33 +29,33 @@ for i = 1:2:d
    %disp(num2str(i));
    
    if(counter <= length(names))
-       prefix = names{1,counter};
+       prefix = strcat(inprefix, '_', names{1,counter});
        disp(prefix);
    else
        disp('No name prefix provided');
-       prefix = strcat('Contrast', num2str(counter));
+       prefix = strcat(inprefix, '_Contrast', num2str(counter));
    
    end
    
    template=load_nii(niiTemplate);
    
    %Save t-statistic image
-   outfilename = strcat(taskprefix, '_',prefix, '_t.nii.gz');
+   outfilename = strcat(prefix, '_t.nii.gz');
    img = make_nii(images.stats(:,:,:,i))
    img.hdr.hist = template.hdr.hist;
    save_nii(img, outfilename);
    
-   outfilename = strcat(taskprefix, '_',prefix, '_t.mat');
+   outfilename = strcat(prefix, '_t.mat');
    stats = images.stats(:,:,:,i);
    save(outfilename, 'stats');
    
    %Save p-value image
-   outfilename = strcat(taskprefix, '_',prefix, '_p.nii.gz');
+   outfilename = strcat(prefix, '_p.nii.gz');
    img = make_nii(images.stats(:,:,:,i+1))
    img.hdr.hist = template.hdr.hist;
    save_nii(img, outfilename);
    
-   outfilename = strcat(taskprefix, '_',prefix, '_p.mat');
+   outfilename = strcat(prefix, '_p.mat');
    stats = images.stats(:,:,:,i+1);
    save(outfilename, 'stats');
    
@@ -74,12 +74,12 @@ for i = 1:2:d
        end
    end
    %Save image
-   outfilename = strcat(taskprefix, '_',prefix, '_1-p.nii.gz');
+   outfilename = strcat(prefix, '_1-p.nii.gz');
    img = make_nii(temp);
    img.hdr.hist = template.hdr.hist;
    save_nii(img, outfilename);
    
-   outfilename = strcat(taskprefix, '_',prefix, '_1-p.mat');
+   outfilename = strcat(prefix, '_1-p.mat');
    stats = temp;
    save(outfilename, 'stats');
    
