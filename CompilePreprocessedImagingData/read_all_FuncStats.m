@@ -130,7 +130,7 @@ save_nii(nif, outname);
 outname = strcat(DATA_DIR,'/BD_TMS_SessionList-', date, '.xls');
 disp(outname);
 
-T = array2table(SCANS, 'VariableNames', {'Subject', 'Session'});
+T = array2table(SCANS, 'VariableNames', {'Subject', 'SessionID'});
 writetable(T, outname);
 
 out = imgData;
